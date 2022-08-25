@@ -1,0 +1,99 @@
+version: '3'
+
+networks:
+  gfcams-network:
+    driver: bridge
+
+services:
+
+        gfcams:
+            container_name: gfcams
+            build:
+                context: ./php-fpm
+                args:
+                    - timezone=${TZ}
+            networks:
+                - gfcams-network
+            ports:
+                - "9000:9000"
+            volumes:
+                - ./../gfcams:/gfcams:rw,cached
+                - gfcams_log:/gfcams/var/log
+            env_file:
+                - .env
+            depends_on:
+                - redis
+                - memcached
+                - db-master
+
+        nginx:
+            container_name: nginx
+            build:
+                context: ./nginx
+                args:
+                    - timezone=${TZ}
+            ports:
+                - "81:80"
+                - "443:443"
+            networks:
+                - gfcams-network
+            depends_on:
+                - gfcams
+            volumes:
+                - ./../gfcams/public:/gfcams/public
+                - ./nginx/ssl:/etc/nginx/ssl
+                - ./nginx/conf.d:/etc/nginx/conf.d
+                - ./nginx/nginx_log:/var/log/nginx
+                - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            env_file:
+                - .env
+            command: /bin/bash -c "exec nginx -g 'daemon off;'"
+
+        redis:
+            container_name: redis
+            image: redis:latest
+            networks:
+                - gfcams-network
+
+        portainer:
+            image: portainer/portainer-ce:latest
+            container_name: portainer
+            restart: always
+            security_opt:
+                - no-new-privileges:true
+            volumes:
+                - /etc/localtime:/etc/localtime:ro
+                - /var/run/docker.sock:/var/run/docker.sock:ro
+                - ./portainer-data:/data
+            ports:
+                - 8000:8000
+                - 9443:9443
+            networks:
+                - gfcams-network
+
+        memcached:
+            container_name: memcached
+            image: memcached:latest
+            networks:
+                - gfcams-network
+
+        db-master:
+            container_name: db-master
+            image: mysql:latest
+            env_file:
+                - ./db/master/.env.master
+            ports:
+                - "4406:3306"
+            volumes:
+                - ./db/master/master.sql:/docker-entrypoint-initdb.d/start.sql
+                - ./db/master/mysql.master.cnf:/etc/mysql/conf.d/mysql.master.cnf
+                - ./db/master/.data/mysql:/var/lib/mysql:rw
+            networks:
+                - gfcams-network
+
+volumes:
+    nginx_log:
+    gfcams_log:
+    db:
+        driver: local
+
