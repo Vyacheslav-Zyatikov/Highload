@@ -11,6 +11,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vk/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/docker/db" />
       <excludeFolder url="file://$MODULE_DIR$/docker/portainer-data" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
