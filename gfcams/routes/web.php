@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoggerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('logger', [LoggerController::class, 'index'])->name('logger');
