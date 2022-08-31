@@ -3,10 +3,17 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-define('LARAVEL_START', microtime(true));
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+
+//function req()
+//{
+//    echo 1;
+//    req();
+//}
+//
+//req();
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +25,6 @@ ini_set('display_errors', 1);
 | instead of starting the framework, which could cause an exception.
 |
 */
-
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
@@ -35,7 +41,6 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 */
 
 require __DIR__.'/../vendor/autoload.php';
-
 /*
 |--------------------------------------------------------------------------
 | Run The Application
