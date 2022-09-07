@@ -91,6 +91,16 @@ services:
             networks:
                 - gfcams-network
 
+        db-maria:
+            container_name: db-maria
+            image: mariadb:latest
+            env_file:
+                - ./db/master/.env.master
+            ports:
+                - "5506:3306"
+            networks:
+                - gfcams-network
+
 volumes:
     nginx_log:
     gfcams_log:
