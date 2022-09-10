@@ -24,7 +24,7 @@ services:
             depends_on:
                 - redis
                 - memcached
-                - db-master
+                - mariadb-master
 
         nginx:
             container_name: nginx
@@ -77,27 +77,81 @@ services:
             networks:
                 - gfcams-network
 
-        db-master:
-            container_name: db-master
-            image: mysql:latest
-            env_file:
-                - ./db/master/.env.master
-            ports:
-                - "4406:3306"
-            volumes:
-                - ./db/master/master.sql:/docker-entrypoint-initdb.d/start.sql
-                - ./db/master/mysql.master.cnf:/etc/mysql/conf.d/mysql.master.cnf
-                - ./db/master/.data/mysql:/var/lib/mysql:rw
-            networks:
-                - gfcams-network
-
-        db-maria:
-            container_name: db-maria
+        mariadb-master:
+            container_name: mariadb-master
             image: mariadb:latest
             env_file:
                 - ./db/master/.env.master
+            volumes:
+                - ./db/master/master.sql:/docker-entrypoint-initdb.d/start.sql
+                - ./db/master/maria.master.cnf:/etc/mysql/conf.d/maria.master.cnf
+                - ./db/master/.data/mysql:/var/lib/mysql:rw
             ports:
                 - "5506:3306"
+            networks:
+                - gfcams-network
+
+        mariadb-slave-1:
+            container_name: mariadb-slave-1
+            image: mariadb:latest
+            env_file:
+                - ./db/slaves/email/.env.slave
+            volumes:
+                - ./db/slaves/slave.sql:/docker-entrypoint-initdb.d/start.sql
+                - ./db/slaves/email/maria.slave.cnf:/etc/mysql/conf.d/maria.slave.cnf
+                - ./db/slaves/email/.data/mysql:/var/lib/mysql:rw
+            ports:
+                - "5507:3306"
+            depends_on:
+                - mariadb-master
+            networks:
+                - gfcams-network
+
+        mariadb-slave-2:
+            container_name: mariadb-slave-2
+            image: mariadb:latest
+            env_file:
+                - ./db/slaves/sms/.env.slave
+            volumes:
+                - ./db/slaves/slave.sql:/docker-entrypoint-initdb.d/start.sql
+                - ./db/slaves/sms/maria.slave.cnf:/etc/mysql/conf.d/maria.slave.cnf
+                - ./db/slaves/sms/.data/mysql:/var/lib/mysql:rw
+            ports:
+                - "5508:3306"
+            depends_on:
+                - mariadb-master
+            networks:
+                - gfcams-network
+
+        mariadb-slave-3:
+            container_name: mariadb-slave-3
+            image: mariadb:latest
+            env_file:
+                - ./db/slaves/gps/.env.slave
+            volumes:
+                - ./db/slaves/slave.sql:/docker-entrypoint-initdb.d/start.sql
+                - ./db/slaves/gps/maria.slave.cnf:/etc/mysql/conf.d/maria.slave.cnf
+                - ./db/slaves/gps/.data/mysql:/var/lib/mysql:rw
+            ports:
+                - "5509:3306"
+            depends_on:
+                - mariadb-master
+            networks:
+                - gfcams-network
+
+        mariadb-slave-4:
+            container_name: mariadb-slave-4
+            image: mariadb:latest
+            env_file:
+                - ./db/slaves/mms/.env.slave
+            volumes:
+                - ./db/slaves/slave.sql:/docker-entrypoint-initdb.d/start.sql
+                - ./db/slaves/mms/maria.slave.cnf:/etc/mysql/conf.d/maria.slave.cnf
+                - ./db/slaves/mms/.data/mysql:/var/lib/mysql:rw
+            ports:
+                - "5510:3306"
+            depends_on:
+                - mariadb-master
             networks:
                 - gfcams-network
 
@@ -106,4 +160,3 @@ volumes:
     gfcams_log:
     db:
         driver: local
-
