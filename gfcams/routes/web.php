@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\LoggerController;
 use App\Http\Controllers\MemcachedController;
 use App\Http\Controllers\RedisController;
