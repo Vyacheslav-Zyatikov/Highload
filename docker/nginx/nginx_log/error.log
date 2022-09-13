@@ -4,3 +4,15 @@
 2022/07/30 13:33:20 [emerg] 1#1: host not found in upstream "vk" in /etc/nginx/conf.d/server.conf:32
 2022/07/30 13:34:00 [emerg] 1#1: host not found in upstream "vk" in /etc/nginx/conf.d/server.conf:32
 2022/07/30 13:35:30 [emerg] 1#1: host not found in upstream "laraproject" in /etc/nginx/conf.d/server.conf:32
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "gfcams" on 0.0.0.0:443, ignored
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "gfcams.test.ru" on 0.0.0.0:443, ignored
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "vk" on 0.0.0.0:443, ignored
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "vk.test.ru" on 0.0.0.0:443, ignored
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "gfcams" on [::]:443, ignored
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "gfcams.test.ru" on [::]:443, ignored
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "vk" on [::]:443, ignored
+2022/09/12 18:03:12 [warn] 1#1: conflicting server name "vk.test.ru" on [::]:443, ignored
+2022/09/12 19:43:59 [emerg] 1#1: host not found in upstream "backend1.gfcams:8080" in /etc/nginx/nginx.conf:29
+2022/09/12 19:50:11 [emerg] 1#1: host not found in upstream "backend1.gfcams:8080" in /etc/nginx/nginx.conf:29
+2022/09/12 19:52:23 [emerg] 1#1: host not found in upstream "backend1.gfcams:8080" in /etc/nginx/nginx.conf:29
+2022/09/13 11:09:07 [emerg] 1#1: host not found in upstream "gfcams2:9002" in /etc/nginx/nginx.conf:31
