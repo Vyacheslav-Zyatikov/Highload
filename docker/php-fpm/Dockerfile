@@ -56,7 +56,7 @@ COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN mkdir -p /var/www/.composer && chown -R www-data /var/www/.composer
-WORKDIR /vk
+WORKDIR /gfcams
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

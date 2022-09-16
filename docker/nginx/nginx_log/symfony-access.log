@@ -7462,3 +7462,5 @@
 172.21.0.1 - - [13/Sep/2022:14:30:28 +0000] "GET / HTTP/1.1" 499 0 "-" "Mozilla/5.0 (pc-x86_64-linux-gnu) Siege/4.0.7"
 172.21.0.1 - - [13/Sep/2022:14:30:28 +0000] "GET / HTTP/1.1" 499 0 "-" "Mozilla/5.0 (pc-x86_64-linux-gnu) Siege/4.0.7"
 172.21.0.1 - - [13/Sep/2022:14:30:28 +0000] "GET / HTTP/1.1" 499 0 "-" "Mozilla/5.0 (pc-x86_64-linux-gnu) Siege/4.0.7"
+172.21.0.1 - - [14/Sep/2022:18:39:09 +0000] "GET / HTTP/2.0" 404 89274 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.167 YaBrowser/22.7.5.933 Yowser/2.5 Safari/537.36"
+172.21.0.1 - - [14/Sep/2022:18:39:10 +0000] "GET /_wdt/6125e4 HTTP/2.0" 200 15834 "https://symfony/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.167 YaBrowser/22.7.5.933 Yowser/2.5 Safari/537.36"
